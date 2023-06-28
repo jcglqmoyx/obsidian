@@ -1,0 +1,10 @@
+# Stars and Bars(隔板法）
+
+### See [Wikipedia](https://en.wikipedia.org/wiki/Stars_and_bars_(combinatorics))
+
+---
+
+### 结论
+
+1. 把 $n$ 个完全相同的小球放到$k$个袋子里($n$ ≥ $k$)，每个袋子都不能为空，则一共有 $C^{k-1}_{n-1}$ 种放法。这个数对应$x_1+x_2+...+x_k=n(n>=k,x_i>0)$的解的数量。
+2. 把 $n$ 个完全相同的小球放到 $k$ 个袋子里, 允许某些袋子为空，则一共有 $C_{n+k-1}^{n}$ 种放法。这个数对应$x_1+x_2+...+x_k=n(x_i>=0)$的解的数量。

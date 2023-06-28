@@ -1,0 +1,140 @@
+## [AcWing **877. 扩展欧几里得算法**](https://www.acwing.com/problem/content/879/)
+
+给定 n 对正整数 $a_i$, $b_i$，对于每对数，求出一组 $x_i$, $y_i$，
+
+使其满足 $a_i * x_i + b_i * y_i =gcd(a_i, b_i)$。
+
+### **输入格式**
+
+第一行包含整数 n。
+
+接下来 n 行，每行包含两个整数 $a_i$, $b_i$。
+
+### **输出格式**
+
+输出共 n 行，对于每组  $a_i$, $b_i$，求出一组满足条件的 $x_i$, $y_i$，每组结果占一行。
+
+本题答案不唯一，输出任意满足条件的 $x_i$, $y_i$均可。
+
+### **数据范围**
+
+1 ≤ n ≤ $10^5$，
+
+1 ≤ $a_i$, $b_i$ ≤ $2 * 10^9$
+
+### **输入样例：**
+
+```
+2
+4 6
+8 18
+```
+
+### **输出样例：**
+
+```diff
+-1 1
+-2 1
+```
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int exgcd(int a, int b, int &x, int &y) {
+    if (!b) {
+        x = 1, y = 0;
+        return a;
+    }
+    int d = exgcd(b, a % b, y, x);
+    y -= (a / b) * x;
+    return d;
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    while (n--) {
+        int a, b, x, y;
+        scanf("%d%d", &a, &b);
+        exgcd(a, b, x, y);
+        printf("%d %d\n", x, y);
+    }
+}
+```
+
+## [AcWing **878. 线性同余方程**](https://www.acwing.com/problem/content/880/)
+
+[See OI Wiki](https://oi-wiki.org/math/number-theory/linear-equation/)
+
+给定 n 组数据 $a_i, b_i, m_i$，对于每组数求出一个 $x_i$，使其满足 $a_i*x_i$$\equiv$$b_i$(mod $m_i$)，如果无解则输出 `impossible`。
+
+### **输入格式**
+
+第一行包含整数 n。
+
+接下来 n 行，每行包含一组数据 $a_i, b_i, m_i$。
+
+### **输出格式**
+
+输出共 n 行，每组数据输出一个整数表示一个满足条件的 $x_i$，如果无解则输出 `impossible`。
+
+每组数据结果占一行，结果可能不唯一，输出任意一个满足条件的结果均可。
+
+输出答案必须在 int 范围之内。
+
+### **数据范围**
+
+1 ≤ n ≤ $10^5$，
+
+1 ≤ $a_i$，$b_i$，$m_i$ ≤ $2 * 10 ^ 9$
+
+### **输入样例：**
+
+```
+2
+2 3 6
+4 3 5
+```
+
+### **输出样例：**
+
+```diff
+impossible
+-3
+```
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using LL = long long;
+
+int exgcd(int a, int b, int &x, int &y) {
+    if (!b) {
+        x = 1, y = 0;
+        return a;
+    }
+    int d = exgcd(b, a % b, y, x);
+    y -= a / b * x;
+    return d;
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    while (n--) {
+        int a, b, m;
+        scanf("%d%d%d", &a, &b, &m);
+
+        int x, y;
+        int d = exgcd(a, m, x, y);
+        if (b % d) puts("impossible");
+        else printf("%lld\n", (LL) b / d * x % m);
+    }
+
+    return 0;
+}
+```
