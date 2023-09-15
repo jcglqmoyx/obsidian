@@ -1,5 +1,3 @@
-# SPFA algorithm
-
 SPFA算法求最短路一般时间复杂度为O(E), 最差时间复杂度为O(E * V)，最差的时候，会被卡成Bellman-Ford算法。
 
 ## [AcWing **851. SPFA求最短路**](https://www.acwing.com/problem/content/853/)

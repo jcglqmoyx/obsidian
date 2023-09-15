@@ -1,6 +1,4 @@
-# Kruskal's algorithm
-
-时间复杂度约为O(E*logE)，并查集的反**[阿克曼函数](https://en.wikipedia.org/wiki/Ackermann_function)时间复杂度可近似看作是O(1)。**
+时间复杂度约为O(E * logE)，并查集的[反阿克曼函数](https://en.wikipedia.org/wiki/Ackermann_function)时间复杂度可近似看作是O(1)。
 
 ## [AcWing 859](https://www.acwing.com/problem/content/861/)
 

@@ -1,5 +1,3 @@
-# Bipartite Graph
-
 ## [AcWing **860. 染色法判定二分图](https://www.acwing.com/problem/content/862/) O(V + E)**
 
 给定一个 n 个点 m 条边的无向图，图中可能存在重边和自环。
