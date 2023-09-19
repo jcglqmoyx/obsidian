@@ -1,5 +1,3 @@
-# Two pointers
-
 ## [LeetCode **2563. Count the Number of Fair Pairs**](https://leetcode.cn/problems/count-the-number-of-fair-pairs/description/)
 
 Given a **0-indexed** integer array `nums` of size `n` and two integers `lower` and `upper`, return *the number of fair pairs*.
