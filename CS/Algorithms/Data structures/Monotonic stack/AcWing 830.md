@@ -1,4 +1,4 @@
-## [LeetCode 830](https://www.acwing.com/problem/content/832/)
+## [Link](https://www.acwing.com/problem/content/832/)
 
 给定一个长度为 $N$ 的整数数列，输出每个数左边第一个比它小的数，如果不存在则输出 −1。
 
