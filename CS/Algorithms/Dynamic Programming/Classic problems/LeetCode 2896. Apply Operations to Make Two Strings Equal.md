@@ -53,7 +53,7 @@ public:
         else if (n & 1) return -1;
         int f0 = 0, f1 = x;
         for (int i = 1; i < v.size(); i++) {
-            int t = min(f1 + x, f0 + (v[i] - v[i - 1]) * 2);
+            int t = min(f0 + (v[i] - v[i - 1]) * 2, f1 + x);
             f0 = f1, f1 = t;
         }
         return f1 / 2;
