@@ -31,3 +31,39 @@ Return *the number of non-empty subarrays in* `nums` *that have a **median** equ
 -   `1 <= n <= 105`
 -   `1 <= nums[i], k <= n`
 -   The integers in `nums` are distinct.
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class Solution {
+public:
+    int countSubarrays(vector<int> &nums, int k) {
+        int n = (int) nums.size(), res = 1;
+        int idx = 0;
+        for (int i = 1; i < n; i++) {
+            if (nums[i] == k) {
+                idx = i;
+                break;
+            }
+        }
+        unordered_map<int, int> cnt;
+        int lt = 0, gt = 0;
+        for (int i = idx - 1; i >= 0; i--) {
+            if (nums[i] < k) lt++;
+            else gt++;
+            if (lt == gt || lt + 1 == gt) res++;
+            cnt[lt - gt]++;
+        }
+        lt = 0, gt = 0;
+        for (int i = idx + 1; i < n; i++) {
+            if (nums[i] < k) lt++;
+            else gt++;
+            res += cnt[gt - lt] + cnt[gt - lt - 1];
+            if (lt == gt || lt + 1 == gt) res++;
+        }
+        return res;
+    }
+};
+```
