@@ -49,28 +49,31 @@ class Solution {
 public:
     int numSubmat(vector<vector<int>> &mat) {
         int n = (int) mat.size(), m = (int) mat[0].size();
-        int row[n][m];
+        vector<vector<int>> row(n, vector<int>(m));
         for (int i = 0; i < n; ++i) {
             for (int j = 0; j < m; ++j) {
-                if (j == 0) row[i][j] = mat[i][j];
-                else if (!mat[i][j]) row[i][j] = 0;
-                else row[i][j] = row[i][j - 1] + 1;
+                if (j == 0) {
+                    row[i][j] = mat[i][j];
+                } else if (mat[i][j]) {
+                    row[i][j] = row[i][j - 1] + 1;
+                } else {
+                    row[i][j] = 0;
+                }
             }
         }
         int res = 0;
         for (int j = 0; j < m; ++j) {
-            stack<pair<int, int>> q;
-            int i = 0, sum = 0;
-            while (i <= n - 1) {
+            stack<pair<int, int>> stk;
+            for (int sum = 0, i = 0; i < n; i++) {
                 int height = 1;
-                while (!q.empty() && q.top().first > row[i][j]) {
-                    sum -= q.top().second * (q.top().first - row[i][j]);
-                    height += q.top().second;
-                    q.pop();
+                while (!stk.empty() && stk.top().first > row[i][j]) {
+                    sum -= stk.top().second * (stk.top().first - row[i][j]);
+                    height += stk.top().second;
+                    stk.pop();
                 }
-                sum += row[i][j], res += sum;
-                q.emplace(row[i][j], height);
-                i++;
+                sum += row[i][j];
+                res += sum;
+                stk.emplace(row[i][j], height);
             }
         }
         return res;
