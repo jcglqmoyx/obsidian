@@ -40,3 +40,51 @@ A **sub-multiset** is an **unordered** collection of elements of the array in wh
 -   `0 <= nums[i] <= 2 * 104`
 -   Sum of `nums` does not exceed `2 * 104`.
 -   `0 <= l <= r <= 2 * 104`
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class Solution {
+public:
+    int countSubMultisets(vector<int> &nums, int l, int r) {
+        int N = 20001, MOD = 1e9 + 7;
+        int cnt[N];
+        memset(cnt, 0, sizeof cnt);
+        int s = 0;
+        for (int x: nums) {
+            cnt[x]++;
+            s += x;
+        }
+        if (s < l) {
+            return 0;
+        }
+        r = min(r, s);
+        int f[r + 1], g[r + 1];
+        memset(f, 0, sizeof f);
+        memset(g, 0, sizeof g);
+        f[0] = 1;
+
+        for (int i = 1; i <= r; i++) {
+            if (cnt[i]) {
+                memcpy(g, f, sizeof f);
+                for (int j = i; j <= r; j++) {
+                    g[j] = (g[j] + g[j - i]) % MOD;
+                }
+                memcpy(f, g, sizeof g);
+                int t = (cnt[i] + 1) * i;
+                for (int j = t; j <= r; j++) {
+                    f[j] = (f[j] - g[j - t]) % MOD;
+                }
+            }
+        }
+        int res = 0;
+        for (int i = l; i <= r; i++) {
+            res = (res + f[i]) % MOD;
+        }
+        res = (res + MOD) % MOD;
+        return (int) (res * (cnt[0] + 1LL) % MOD);
+    }
+};
+```
