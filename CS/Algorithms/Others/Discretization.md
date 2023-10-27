@@ -1,5 +1,3 @@
-# Discretization
-
 ## [AcWing 802](https://www.acwing.com/problem/content/804/)
 
 假定有一个无限长的数轴，数轴上每个坐标上的数都是 0。
