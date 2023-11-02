@@ -1,5 +1,3 @@
-# Fast Power Algorithm
-
 ## [AcWing **875. 快速幂**](https://www.acwing.com/problem/content/877/)
 
 给定 n 组 $a_i$, $b_i$, $p_i$，对于每组数据，求出 $a_i^{b_i}mod\ p_i$ 的值。
