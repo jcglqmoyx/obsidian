@@ -1,5 +1,3 @@
-# Hash table
-
 ## [AcWing 840](https://www.acwing.com/problem/content/description/842/) (Template, without remove() operation)
 
 维护一个集合，支持如下几种操作：
