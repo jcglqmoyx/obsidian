@@ -25,14 +25,14 @@ Return *the **total number** of ways to distribute* `n` *candies among* `3` *chi
 -   `1 <= limit <= 106`
 
 ```cpp
-long long comb(long long n) {
+long long c2(long long n) {
     return n > 1 ? n * (n - 1) / 2 : 0;
 }
 
 class Solution {
 public:
-    long long distributecombandies(int n, int limit) {
-        return comb(n + 2) - 3 * comb(n - limit + 1) + 3 * comb(n - 2 * limit) - comb(n - 3 * limit - 1);
+    long long distributeCandies(int n, int limit) {
+        return c2(n + 2) - 3 * c2(n - limit + 1) + 3 * c2(n - 2 * limit) - c2(n - 3 * limit - 1);
     }
 };
 ```

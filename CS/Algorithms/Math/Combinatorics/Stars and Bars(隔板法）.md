@@ -1,6 +1,4 @@
-# Stars and Bars(隔板法）
-
-### See [Wikipedia](https://en.wikipedia.org/wiki/Stars_and_bars_(combinatorics))
+### [Wikipedia](https://en.wikipedia.org/wiki/Stars_and_bars_(combinatorics))
 
 ---
 
