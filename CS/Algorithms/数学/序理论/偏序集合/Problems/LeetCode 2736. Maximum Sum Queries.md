@@ -47,69 +47,76 @@ Therefore, we return `[6,10,7]`.
 -   `1 <= xi, yi <= 109`
 
 ```cpp
-#include <bits/stdc++.h>  
-  
-using namespace std;  
-  
-class Solution {  
-public:  
-    vector<int> maximumSumQueries(vector<int> &nums1, vector<int> &nums2, vector<vector<int>> &queries) {  
-        unordered_map<int, int> rank;  
-        int n = (int) nums1.size(), m = (int) queries.size();  
-        vector<int> v;  
-        v.reserve(n * 2 + m * 2);  
-        for (int x: nums1) v.emplace_back(x);  
-        for (int x: nums2) v.emplace_back(x);  
-        for (auto &q: queries) {  
-            v.emplace_back(q[0]);  
-            v.emplace_back(q[1]);  
-        }  
-        sort(v.begin(), v.end(), greater<>());  
-        v.erase(unique(v.begin(), v.end()), v.end());  
-  
-        int sz = (int) v.size();  
-  
-        for (int i = 1; i <= sz; i++) {  
-            rank[v[i - 1]] = i;  
-        }  
-  
-        int tr[sz + 1];  
-        memset(tr, -1, sizeof tr);  
-  
-        auto lb = [](int x) {  
-            return x & -x;  
-        };  
-        auto query = [&](int x) {  
-            int res = -1;  
-            while (x) {  
-                res = max(res, tr[x]);  
-                x -= lb(x);  
-            }  
-            return res;  
-        };  
-        auto update = [&](int x, int val) {  
-            while (x <= sz) {  
-                tr[x] = max(tr[x], val);  
-                x += lb(x);  
-            }  
-        };  
-        vector<vector<int>> vec(n + m);  
-        for (int i = 0; i < n; i++) {  
-            vec[i] = {nums1[i], nums2[i], nums1[i] + nums2[i]};  
-        }  
-        for (int i = n; i < n + m; i++) {  
-            vec[i] = {queries[i - n][0], queries[i - n][1], n - i};  
-        }  
-        sort(vec.begin(), vec.end(), greater<>());  
-        vector<int> res(m, -1);  
-        for (auto &e: vec) {  
-            if (e[2] <= 0) {  
-                res[-e[2]] = query(rank[e[1]]);  
-            } else {  
-                update(rank[e[1]], e[2]);  
-            }  
-        }  
-        return res;  
-    }  
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class Solution {
+public:
+    vector<int> maximumSumQueries(vector<int>&nums1, vector<int>&nums2, vector<vector<int>>&queries) {
+        unordered_map<int, int> rank;
+        int n = (int)nums1.size(), m = (int)queries.size();
+        vector<int> v;
+        v.reserve(n + m);
+        for (int x: nums2) v.emplace_back(x);
+        for (auto&q: queries) {
+            v.emplace_back(q[1]);
+        }
+        sort(v.begin(), v.end(), greater<>());
+        v.erase(unique(v.begin(), v.end()), v.end());
+
+        int sz = (int)v.size();
+
+        for (int i = 1; i <= sz; i++) {
+            rank[v[i - 1]] = i;
+        }
+
+        int tr[sz + 1];
+        memset(tr, -1, sizeof tr);
+
+        auto lb = [](int x) {
+            return x & -x;
+        };
+        auto query = [&](int x) {
+            int res = -1;
+            while (x) {
+                res = max(res, tr[x]);
+                x -= lb(x);
+            }
+            return res;
+        };
+        auto update = [&](int x, int val) {
+            while (x <= sz) {
+                tr[x] = max(tr[x], val);
+                x += lb(x);
+            }
+        };
+        struct T {
+            int x, y, type;
+
+            bool operator<(const T&t) const {
+                if (x == t.x && y == t.y) return type > t.type;
+                if (x == t.x) return y > t.y;
+                return x > t.x;
+            }
+        };
+        vector<T> vec(n + m);
+        for (int i = 0; i < n; i++) {
+            vec[i] = {nums1[i], nums2[i], nums1[i] + nums2[i]};
+        }
+        for (int i = n; i < n + m; i++) {
+            vec[i] = {queries[i - n][0], queries[i - n][1], n - i};
+        }
+        sort(vec.begin(), vec.end());
+        vector<int> res(m, -1);
+        for (auto&e: vec) {
+            if (e.type <= 0) {
+                res[-e.type] = query(rank[e.y]);
+            } else {
+                update(rank[e.y], e.type);
+            }
+        }
+        return res;
+    }
 };
 ```
