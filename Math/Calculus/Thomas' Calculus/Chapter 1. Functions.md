@@ -43,7 +43,7 @@ $$cot^2\theta + 1 = csc^2\theta$$
 
 $$cos(A+B)=cosA\cdot cosB-sinA\cdot sinB$$
 $$sin(A+B)=sinA \cdot cosB + cosA \cdot sinB$$
-**Double-Angle Formulas**: $cos2θ = cos2θ−sin2θ$, $sin2θ = 2sinθ \cdot cosθ$
+**Double-Angle Formulas**: $cos2θ = cos^2θ−sin^2θ$, $sin2θ = 2sinθ \cdot cosθ$
 
 **Half-Angle Formulas**: $cos^2\theta={1+cos2\theta \over 2}$, $sin^2\theta={1-cos2\theta \over 2}$
 **The Law of Cosines**: $c2 =a2+b2−2ab \cdot cosθ$.
