@@ -48,6 +48,9 @@ if $a > 0$, then $a^x$ is differentiable and
 ${d \over {dx}} a^x = a^x ln \ a$
 
 ---
+${d \over {dx}} e^x = e^x$
+
+---
 
 ${d \over dx}log_ax = {1 \over {x ln \ a}}, a > 0 , a \ne 1$
 
