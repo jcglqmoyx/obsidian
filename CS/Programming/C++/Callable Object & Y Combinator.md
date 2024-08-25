@@ -30,7 +30,7 @@ public:
 
 
 ```cpp
-        auto dfs2 = [&](auto &&dfs2, int u, int p) -> void { // if there's not a return value, you must explicitly write void here
+        auto dfs2 = [&](auto &&dfs2, int u, int p) -> void {
             if (p != -1) {
                 up[u] = up[p];
                 if (idx1[p] == u) up[u] = max(up[u], down2[p]);
