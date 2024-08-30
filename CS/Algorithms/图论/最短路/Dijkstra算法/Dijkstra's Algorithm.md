@@ -83,7 +83,7 @@ int main() {
 }
 ```
 
-## [AcWing 850 (堆优化版Dijkstra, 稀疏图, O(E*log(V))](https://www.acwing.com/problem/content/description/852/)
+## [AcWing 850 (堆优化版Dijkstra, 稀疏图, O((V+E) * log(V))](https://www.acwing.com/problem/content/description/852/)
 
 给定一个 n 个点 m 条边的有向图，图中可能存在重边和自环，所有边权均为非负值。
 
