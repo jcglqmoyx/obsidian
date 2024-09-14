@@ -33,42 +33,50 @@ It is **guaranteed** an answer exists.
 -   Every skill in `people[i]` is a skill in `req_skills`.
 -   It is guaranteed a sufficient team exists.
 ```cpp
-#include <bits/stdc++.h>  
-  
-using namespace std;  
-  
-class Solution {  
-public:  
-    vector<int> smallestSufficientTeam(vector<string> &req_skills, vector<vector<string>> &people) {  
-        int n = (int) req_skills.size(), m = (int) people.size();  
-        unordered_map<string, int> skill_map;  
-        vector<int> p(m);  
-        for (int i = 0; i < n; i++) {  
-            skill_map[req_skills[i]] = i;  
-        }  
-        for (int i = 0; i < m; i++) {  
-            for (auto &skill: people[i]) {  
-                p[i] |= 1 << skill_map[skill];  
-            }  
-        }  
-        vector<pair<int, int>> path(1 << n);  
-        vector<int> f(1 << n, n + 1);  
-        f[0] = 0;  
-        for (int i = 0; i < 1 << n; i++) {  
-            for (int j = 0; j < m; j++) {  
-                int v = i | p[j];  
-                if (f[v] > f[i] + 1) {  
-                    f[v] = f[i] + 1;  
-                    path[v] = {i, j};  
-                }  
-            }  
-        }  
-        vector<int> res;  
-        for (int state = (1 << n) - 1; state;) {  
-            res.push_back(path[state].second);  
-            state = path[state].first;  
-        }  
-        return res;  
-    }  
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class Solution {
+public:
+    vector<int> smallestSufficientTeam(vector<string> &req_skills, vector<vector<string>> &people) {
+        unordered_map<string, int> map;
+        auto n = req_skills.size(), m = people.size();
+        for (int i = 0; i < n; i++) {
+            map[req_skills[i]] = i;
+        }
+        vector<int> p(m);
+        for (int i = 0; i < m; i++) {
+            for (auto &s: people[i]) {
+                p[i] |= 1 << map[s];
+            }
+        }
+        int f[1 << n];
+        memset(f, -1, sizeof f);
+        f[0] = 0;
+        auto dp = [&](auto &&dp, int mask) -> int {
+            if (f[mask] != -1) return f[mask];
+            f[mask] = 0x3f3f3f3f;
+            for (int x: p) {
+                if (mask & x) {
+                    f[mask] = min(f[mask], dp(dp, mask ^ (mask & x)) + 1);
+                }
+            }
+            return f[mask];
+        };
+        dp(dp, (1 << n) - 1);
+        vector<int> res;
+        for (int start = 0, mask = (1 << n) - 1; mask;) {
+            for (int i = start; i < m; i++) {
+                if ((mask & p[i]) && f[mask] == f[mask ^ (mask & p[i])] + 1) {
+                    mask ^= mask & p[i];
+                    res.emplace_back(i);
+                    start = i + 1;
+                    break;
+                }
+            }
+        }
+        return res;
+    }
 };
 ```
