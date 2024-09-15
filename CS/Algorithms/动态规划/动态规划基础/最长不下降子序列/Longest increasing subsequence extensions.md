@@ -1,7 +1,3 @@
-# Longest increasing subsequence
-
-[**Longest Increasing Subsequence**](Algorithms/Dynamic%20Programming/Longest%20increasing%20subsequence1/Longest%20Increasing%20Subsequence.md)
-
 ## AcWing **1010. 拦截导弹**
 
 某国为了防御敌国的导弹袭击，发展出一种导弹拦截系统。

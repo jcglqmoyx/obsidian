@@ -1,5 +1,3 @@
-# Longest Increasing Subsequence
-
 ## [AcWing **895. 最长上升子序列**](https://www.acwing.com/problem/content/description/897/)
 
 给定一个长度为 N 的数列，求数值严格单调递增的子序列的长度最长是多少。
