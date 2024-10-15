@@ -1,5 +1,5 @@
 ---
-page-title: 638. Shopping Offers
+page-title: LeetCode 638. Shopping Offers
 url: https://leetcode.com/problems/shopping-offers/description/
 date: 2024-10-11 22:23:50
 ---
@@ -38,3 +38,51 @@ You cannot add more items, though only $9 for 2A ,2B and 1C.
 -   `special[i].length == n + 1`
 -   `0 <= special[i][j] <= 50`
 -   The input is generated that at least one of `special[i][j]` is non-zero for `0 <= j <= n - 1`.
+
+```cpp
+#include <bits/stdc++.h>  
+  
+using namespace std;  
+  
+class Solution {  
+public:  
+    int shoppingOffers(vector<int> &price, vector<vector<int>> &special, vector<int> &needs) {  
+        auto n = price.size();  
+        vector<vector<int>> special_offer;  
+        for (auto &offer: special) {  
+            int tot = 0;  
+            for (int i = 0; i < n; i++) {  
+                tot += price[i] * offer[i];  
+            }  
+            if (tot > offer[n]) {  
+                special_offer.emplace_back(offer);  
+            }  
+        }  
+        map<vector<int>, int> memo;  
+        auto dp = [&](auto &&dp, vector<int> needs) {  
+            if (memo.contains(needs)) {  
+                return memo[needs];  
+            }  
+            int res = 0;  
+            for (int i = 0; i < n; i++) {  
+                res += price[i] * needs[i];  
+            }  
+            for (auto &offer: special_offer) {  
+                vector<int> t;  
+                for (int i = 0; i < n; i++) {  
+                    if (offer[i] > needs[i]) {  
+                        break;  
+                    }  
+                    t.emplace_back(needs[i] - offer[i]);  
+                }  
+                if (t.size() == n) {  
+                    res = min(res, dp(dp, t) + offer[n]);  
+                }  
+            }  
+            memo[needs] = res;  
+            return res;  
+        };  
+        return dp(dp, needs);  
+    }  
+};
+```
