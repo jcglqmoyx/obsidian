@@ -70,3 +70,6 @@ int main() {
     return 0;  
 }
 ```
+
+
+[洛谷 P3805 【模板】manacher](https://www.luogu.com.cn/problem/P3805)
