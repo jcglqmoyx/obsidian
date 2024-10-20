@@ -33,43 +33,40 @@ abcbabcbabcba
 #pragma GCC optimize("Ofast", "inline", "-ffast-math")
 #pragma GCC target("avx,sse2,sse3,sse4,mmx")
 
-#include <bits/stdc++.h>
-
-using namespace std;
-
-const int N = 2e7 + 10;
-
-int n;
-char a[N], b[N];
-int p[N];
-
-void init() {
-    int k = 0;
-    n = (int) strlen(a);
-    b[k++] = '^', b[k++] = '#';
-    for (int i = 0; i < n; i++) b[k++] = a[i], b[k++] = '#';
-    b[k++] = '$';
-    n = k;
-}
-
-void manacher() {
-    int mr = 0, mid;
-    for (int i = 1; i < n; i++) {
-        if (i < mr) p[i] = min(p[(mid << 1) - i], mr - i);
-        else p[i] = 1;
-        while (b[i - p[i]] == b[i + p[i]]) p[i]++;
-        if (i + p[i] > mr) {
-            mr = i + p[i];
-            mid = i;
-        }
-    }
-}
-
-int main() {
-    scanf("%s", a);
-    init();
-    manacher();
-    printf("%d", *max_element(p, p + n) - 1);
-    return 0;
+#include <bits/stdc++.h>  
+  
+using namespace std;  
+  
+const int N = 1e7 + 5;  
+  
+char s[N];  
+char t[N << 1];  
+int d[N << 1];  
+  
+void solve() {  
+    scanf("%s", s);  
+    t[0] = '^', t[1] = '#';  
+    int n = 2;  
+    auto len = strlen(s);  
+    for (int i = 0; i < len; i++) {  
+        t[n++] = s[i];  
+        t[n++] = '#';  
+    }  
+    t[n++] = '$';  
+  
+    d[1] = 1;  
+    int res = 0;  
+    for (int l = 1, r = 1, i = 2; i < n; i++) {  
+        if (i <= r) d[i] = min(d[l + r - i], r - i + 1);  
+        while (t[i - d[i]] == t[i + d[i]]) d[i]++;  
+        if (i + d[i] - 1 > r) l = i - d[i] + 1, r = i + d[i] - 1;  
+        res = max(res, d[i] - 1);  
+    }  
+    printf("%d\n", res);  
+}  
+  
+int main() {  
+    solve();  
+    return 0;  
 }
 ```
