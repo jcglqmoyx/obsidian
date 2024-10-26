@@ -50,6 +50,10 @@ Print $ q $ integers — the diameter of the current tree after each operation.
 6
 ```
 
+## 算法
+
+注意到，每次增加一个节点，直径长度至多增加 1，并且直径的两个端点，其中一个不变。  <br>维护直径的两个端点 end1 和 end2，以及直径长度 diameter。  <br>初始值 end1=2, end2=3, diameter=2。  <br>每次添加节点 cur 时，计算 cur 到端点的距离 dis(end1, cur) 和 dis(end2, cur)，如果其中有一个距离大于 diameter，那么更新 diameter 和直径端点。
+
 ```cpp
 #include <bits/stdc++.h>  
   
