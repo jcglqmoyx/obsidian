@@ -1,4 +1,5 @@
-Type the following command in the console(Press `~` to show console), then when you press 3, you'll say `!heal`.
+Type the command in the console to bind keys.
 ```
-bind 3 say !heal
+/bind 3 say !heal
+/bind 0 say !gamble 50000
 ```
